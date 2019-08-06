@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include "ThirdParty/lz4/lib/lz4.h"
-//#include "lib/lz4.h"
 
 #include <stdio.h>
 #include <string.h>
