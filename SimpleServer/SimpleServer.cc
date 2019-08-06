@@ -1,41 +1,22 @@
 #include <string>
 #include <iostream>
-#include "ThirdParty/lz4/lib/lz4.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+#include "LZ4Utils.cc"
 
 using namespace std;
 
 int main() {
     cout << "SimpleServer" << endl;
 
-    const char* const src = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor site amat.";
-    const int src_size = (int)(strlen(src) + 1);
+    std::string data("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
 
-    const int max_dst_size = LZ4_compressBound(src_size);
+    const std::string res = utils::compress(data);
 
-    char* compressed_data = malloc((size_t)max_dst_size);
-
-    if (compressed_data == NULL) {
-        cout << "Failed to allocate memory for *compressed_data." << endl;
-    }
-
-    const int compressed_data_size = LZ4_compress_default(src, compressed_data, src_size, max_dst_size);
-
-    if (compressed_data_size <= 0) {
-        cout << "A 0 or negative result from LZ4_compress_default() indicates a failure trying to compress the data." << endl;
-        return 0;
-    }
-
-    if (compressed_data_size > 0) {
-        cout << "We successfully compressed some data! Ratio." << endl;
-        cout << "Compressed:" << strlen(compressed_data) << endl;
-        return 0;
-    }
-
-    free(compressed_data);
+    cout << "Res: " << res << endl;
 
     return 0;
 }
