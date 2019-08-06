@@ -7,7 +7,7 @@
 #include "ThirdParty/lz4/lib/lz4.h"
 
 namespace utils {
-    const std::string compress(std::string & str) {
+    const std::string compress(const std::string & str) {
         const int maxSize = LZ4_compressBound(str.length());
 
         char* buffer = new char[maxSize];
@@ -25,6 +25,9 @@ namespace utils {
         std::cout << str.length() << std::endl;
         std::cout << compressedSize << std::endl;
 
-        return std::string(buffer);
+        std::string res(buffer);
+        delete buffer;
+
+        return res;
     }
 }
