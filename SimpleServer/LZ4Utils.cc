@@ -26,7 +26,7 @@ namespace utils {
         std::cout << compressedSize << std::endl;
 
         std::string res(buffer);
-        delete buffer;
+        delete[] buffer;
 
         return res;
     }
